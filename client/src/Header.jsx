@@ -4,7 +4,7 @@ export default function Header() {
     return (
       <div>
         {/* Header Component */}
-        <header className='flex p-2 justify-between items-center -border-8 bg-green-600'>
+        <header className='flex p-2 justify-between items-center -border-8 bg-green-600 rounded-md'>
         
           {/* Logo Component */}
           <a id='logo-image' href="" className='flex items-center gap-1'>
