@@ -30,7 +30,7 @@ export default function Header() {
   
           {/* Search Bar Component */}
           <div className='flex border border-green-500 rounded-full px-4 py-2 gap-20 shadow-md shadow-grey-500 items-centre'>
-            <p>Search Active Players</p>
+            <p>Search Active Atheletes</p>
     
             {/* Search Icon */}
             <a href="" className=''>

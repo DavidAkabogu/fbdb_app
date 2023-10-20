@@ -2,10 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
 require("dotenv").config();
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
+const jwtSecret = "kadeco100%";
 
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
@@ -33,13 +35,20 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  const userDoc = await User.findOne({ email }).maxTimeMS(20000);
 
-  try {
-    const userDoc = await User.findOne({ email });
-    if (userDoc) {
-      res.json("found");
+  if (userDoc) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      // jwt.sign({email:userDoc.email, id:userDoc._id}, jwtSecret, {}, (err, token) => {
+      //   if (err) throw err;
+      //   res.cookie('token', token).json('pass ok');
+      // });
+      res.json("pass ok");
+    } else {
+      res.json("pass not ok");
     }
-  } catch (e) {
+  } else {
     res.json("not found");
   }
 });
