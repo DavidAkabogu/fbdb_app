@@ -34,7 +34,7 @@ export default function Header() {
               d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
             />
           </svg>
-          <span className="font-bold text-xl">Sports DB</span>
+          <span className="font-bold text-xl">Naija SDB</span>
         </Link>
 
         {/* Menu Component */}
@@ -110,7 +110,7 @@ export default function Header() {
               />
             </svg>
           </div>
-          {!!user && <div>{user.name}</div>};
+          {!!user && <div>{user.name}</div>}
         </Link>
       </header>
     </div>

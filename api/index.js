@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "kadeco100%";
@@ -46,7 +47,7 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       jwt.sign(
-        { email: userDoc.email, id: userDoc._id, name: userDoc.name },
+        { email: userDoc.email, id: userDoc._id},
         jwtSecret,
         {},
         (err, token) => {

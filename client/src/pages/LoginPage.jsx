@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import axios from "axios";
-// eslint-disable-next-line no-unused-vars
 import { Link, Navigate} from "react-router-dom";
 import { UserContext } from "../UserContext";
 
@@ -24,7 +23,7 @@ export default function LoginPage() {
   }
 
   if (redirect) {
-    // return <Navigate to={'/'} />
+    return <Navigate to={'/'} />
   }
 
   return (
