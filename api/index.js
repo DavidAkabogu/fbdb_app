@@ -63,16 +63,37 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
-  const { token } = req.cookies;
-  if (token) {
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-      if (err) throw err;
-      const { name, email, _id } = await User.findById(userData.id);
-      res.json(name, email, _id);
-    });
-  } else {
-    res.json(null);
+// app.get("/profile", (req, res) => {
+//   const { token } = req.cookies;
+//   if (token) {
+//     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+//       if (err) throw err;
+//       const { name, email, _id } = await User.findById(userData.id);
+//       res.json(name, email, _id);
+//     });
+//   } else {
+//     res.json(null);
+//   }
+// });
+
+app.get("/profile", getUserProfile = async (req, res) => {
+  try {
+    const { token } = req.cookies;
+
+    if (token) {
+      const userData = await jwt.verify(token, jwtSecret);
+      const user = await User.findById(userData.id);
+
+      if (user) {
+        const { name, email, _id } = user;
+        return res.json({ name, email, _id });
+      }
+    }
+
+    return res.json(null);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 

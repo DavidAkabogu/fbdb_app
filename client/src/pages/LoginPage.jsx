@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import axios from "axios";
-import { Link, Navigate} from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { Link, } from "react-router-dom";
+import { UserContext } from "../UserContext.jsx";
 
 export default function LoginPage() {
 
@@ -23,7 +23,7 @@ export default function LoginPage() {
   }
 
   if (redirect) {
-    return <Navigate to={'/'} />
+    // return <Navigate to={'/'} />
   }
 
   return (

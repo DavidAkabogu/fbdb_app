@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./UserContext.jsx";
 
 export default function Header() {
   const { user } = useContext(UserContext);
@@ -73,8 +73,8 @@ export default function Header() {
           </a>
         </div>
 
-        {/* User Login */}
-        {/* Drop down Menu */}
+        {/* user login component */}
+        {/* drop down menu */}
         <Link
           to={user ? "/account" : "/login"}
           className="flex border border-green-500 rounded-full px-4 py-2 gap-2 items-centre"
