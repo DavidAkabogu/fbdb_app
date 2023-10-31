@@ -11,7 +11,7 @@ const athleteSchema = new mongoose.Schema({
     age: Number,
     weight: String,
     height: String,
-    description: String, //short words from athlete
+    bio: String, //short words from athlete
 });
 
 const AthleteModel = mongoose.model('Athlete', athleteSchema);
