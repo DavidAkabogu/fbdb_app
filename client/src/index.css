@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"], input[type="password"], input[type="email"], textarea {
     @apply w-full border my-1 py-2 px-3 rounded-xl; 
 }
 
@@ -12,6 +12,6 @@ button {
 }
 
 button.primary {
-    background-color: green;
-    @apply bg-green-500 p-2 w-full text-white rounded-xl;
+    background-color: greenyellow;
+    @apply bg-green-400 p-2 w-full rounded-xl;
 }
