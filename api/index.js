@@ -7,6 +7,7 @@ const User = require("./models/User.js");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
 const multer = require('multer');
+const fs = require('fs');
 
 require("dotenv").config();
 
@@ -26,7 +27,7 @@ app.get("/test", (req, res) => {
   res.json("express. test ok!");
 });
 
-// register backend point
+// register user endpoint
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -42,7 +43,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// login backend point
+// login user endpoint
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email }).maxTimeMS(20000);
@@ -67,7 +68,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// backend user profile
+// user profile endpoint
 app.get(
   "/profile",
   (getUserProfile = async (req, res) => {
@@ -92,7 +93,7 @@ app.get(
   })
 );
 
-// backend login function
+// logout function
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json(true);
 });
@@ -115,9 +116,19 @@ app.post("/upload-by-link", async (req, res) => {
   }
 });
 
-const photosMiddleware = multer({dest: 'uploads'});
+// upload from device
+const photosMiddleware = multer({dest: 'uploads/'});
 app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
-  res.json(req.files);
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    const {path, originalname} = req.files[i];
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    const newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
+    uploadedFiles.push(newPath.replace('uploads/', ''));
+  }
+  res.json(uploadedFiles);
 });
 
 app.listen(4000);

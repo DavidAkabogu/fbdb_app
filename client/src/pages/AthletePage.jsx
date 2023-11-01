@@ -33,11 +33,11 @@ export default function AthletePage() {
       data.append('photos', files[i]);
     }
     axios.post('/upload', data, {
-      headers: {'Content-Type': 'multipart/form-data'}
+      headers: {'Content-type': 'multipart/form-data'}
     }).then(response => {
       const {data:filename} = response;
       setAddedPhoto((prev) => {
-        return [...prev, filename]; 
+        return [...prev, ...filename]; 
     });
   })
   }
