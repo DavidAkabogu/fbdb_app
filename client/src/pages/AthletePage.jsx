@@ -26,6 +26,22 @@ export default function AthletePage() {
     setPhotoLink("");
   }
 
+  function uploadPhoto(ev) {
+    const files =  ev.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append('photos', files[i]);
+    }
+    axios.post('/upload', data, {
+      headers: {'Content-Type': 'multipart/form-data'}
+    }).then(response => {
+      const {data:filename} = response;
+      setAddedPhoto((prev) => {
+        return [...prev, filename]; 
+    });
+  })
+  }
+
   return (
     <div>
       {action !== "new" && (
@@ -79,7 +95,8 @@ export default function AthletePage() {
                     />
                   </div>
                 ))}
-              <button className="flex border bg-transparent rounded-lg p-6 gap-1 items-center justify-center">
+              <label className=" cursor-pointer flex border bg-transparent rounded-lg p-6 gap-1 items-center justify-center">
+              <input type="file" className="hidden" onChange={uploadPhoto} />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -95,7 +112,7 @@ export default function AthletePage() {
                   />
                 </svg>
                 Upload
-              </button>
+              </label>
             </div>
 
             <h2 className=" text-lg mt-4">Sport</h2>

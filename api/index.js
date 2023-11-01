@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
+const multer = require('multer');
+
 require("dotenv").config();
 
 const app = express();
@@ -111,6 +113,11 @@ app.post("/upload-by-link", async (req, res) => {
       .status(500)
       .json({ error: "An error occurred while processing the request." });
   }
+});
+
+const photosMiddleware = multer({dest: 'uploads'});
+app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+  res.json(req.files);
 });
 
 app.listen(4000);
