@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
+const Athlete = require("./models/Athelete.js");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
-const multer = require('multer');
-const fs = require('fs');
+const multer = require("multer");
+const fs = require("fs");
 
 require("dotenv").config();
 
@@ -117,18 +118,41 @@ app.post("/upload-by-link", async (req, res) => {
 });
 
 // upload from device
-const photosMiddleware = multer({dest: 'uploads/'});
-app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+const photosMiddleware = multer({ dest: "uploads/" });
+app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
   const uploadedFiles = [];
   for (let i = 0; i < req.files.length; i++) {
-    const {path, originalname} = req.files[i];
-    const parts = originalname.split('.');
+    const { path, originalname } = req.files[i];
+    const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
-    const newPath = path + '.' + ext;
+    const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace('uploads/', ''));
+    uploadedFiles.push(newPath.replace("uploads/", ""));
   }
   res.json(uploadedFiles);
+});
+
+// athlete biodata
+app.post("/biodata", (req, res) => {
+  const { token } = req.cookies;
+  const { addedPhoto, sport, school, name, age, weight, height, bio } =
+    req.body;
+
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const athleteDoc = await Athlete.create({
+      owner: userData.id,
+      addedPhoto,
+      sport,
+      school,
+      name,
+      age,
+      weight,
+      height,
+      bio,
+    });
+    res.json(athleteDoc);
+  });
 });
 
 app.listen(4000);
