@@ -132,7 +132,7 @@ app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
   res.json(uploadedFiles);
 });
 
-// athlete biodata
+// new athlete biodata
 app.post("/biodata", (req, res) => {
   const { token } = req.cookies;
   const { addedPhoto, sport, school, name, age, weight, height, bio } =
@@ -141,8 +141,8 @@ app.post("/biodata", (req, res) => {
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const athleteDoc = await Athlete.create({
-      owner: userData.id,
-      addedPhoto,
+      athlete: userData.id,
+      photo: addedPhoto,
       sport,
       school,
       name,
@@ -152,6 +152,46 @@ app.post("/biodata", (req, res) => {
       bio,
     });
     res.json(athleteDoc);
+  });
+});
+
+// find athlete
+app.get("/biodata", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    const { id } = userData;
+    res.json(await Athlete.find({ athlete: id }));
+  });
+});
+
+// find athlete by id
+app.get("/biodata/:id", async (req, res) => {
+  const { id } = req.params;
+  res.json(await Athlete.findById(id));
+});
+
+// update athlete data
+app.put("/biodata", async (req, res) => {
+  const { token } = req.cookies;
+  const { id, addedPhoto, sport, school, name, age, weight, height, bio } =
+    req.body;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const athleteDoc = await Athlete.findById(id);
+    if (userData.id === athleteDoc.athlete.toString()) {
+      athleteDoc.set({
+        photo: addedPhoto,
+        sport,
+        school,
+        name,
+        age,
+        weight,
+        height,
+        bio,
+      });
+      await athleteDoc.save();
+      res.json('ok');
+    }
   });
 });
 

@@ -1,10 +1,11 @@
 import PhotosUploader from "../PhotosUploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import AccountNav from "../AccountNav";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export default function AthleteFormPage() {
+  const { id } = useParams();
   const [addedPhoto, setAddedPhoto] = useState("");
   const [sport, setSport] = useState("");
   const [school, setSchool] = useState("");
@@ -15,28 +16,57 @@ export default function AthleteFormPage() {
   const [bio, setBio] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get("/biodata/" + id).then((response) => {
+      const { data } = response;
+      setAddedPhoto(data.photo);
+      setSport(data.sport);
+      setSchool(data.school);
+      setName(data.name);
+      setAge(data.age);
+      setWeight(data.weight);
+      setHeight(data.height);
+      setBio(data.bio);
+    });
+  }, [id]);
+
   if (redirect) {
     return <Navigate to={"/account/biodata"} />;
   }
 
-  async function addNewAthlete(ev) {
+  async function saveAthlete(ev) {
     ev.preventDefault();
-    await axios.post("/biodata", {
+    const athleteData = {
       addedPhoto,
       sport,
+      school,
       name,
       age,
       weight,
       height,
       bio,
-    });
-    setRedirect(true);
+    };
+    if (id) {
+      // update
+      await axios.put("/biodata", {
+        id,
+        ...athleteData,
+      });
+      setRedirect(true);
+    } else {
+      // new place
+      await axios.post("/biodata", athleteData);
+      setRedirect(true);
+    }
   }
 
   return (
     <div>
       <AccountNav />
-      <form onSubmit={addNewAthlete}>
+      <form onSubmit={saveAthlete}>
         <h2 className="text-lg mt-4">Photo</h2>
         <p className="text-gray-500 text-sm"> Upload a picture </p>
 

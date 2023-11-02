@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 // to retrieve data from qualified registered athlete
 const athleteSchema = new mongoose.Schema({
     athlete: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
-    photo: String,
+    photo: [String],
     sport: String, // sport title. Football, Swimming, Boxing etc
     school: String,
     name: String,

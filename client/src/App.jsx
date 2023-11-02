@@ -24,6 +24,7 @@ function App() {
           <Route path="/account/" element={<ProfilePage />} />
           <Route path="/account/biodata" element={<AthletePage />} />
           <Route path="/account/biodata/new" element={<AthleteFormPage />} />
+          <Route path="/account/biodata/:id" element={<AthleteFormPage />} />
         </Route>
       </Routes>
     </UserContextProvider>
