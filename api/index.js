@@ -156,7 +156,7 @@ app.post("/biodata", (req, res) => {
 });
 
 // find athlete
-app.get("/biodata", (req, res) => {
+app.get("/user-biodata", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const { id } = userData;
@@ -194,5 +194,9 @@ app.put("/biodata", async (req, res) => {
     }
   });
 });
+
+app.get('/biodata', async (req,res) => {
+  res.json(await Athlete.find());
+})
 
 app.listen(4000);

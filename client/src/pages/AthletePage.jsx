@@ -6,7 +6,7 @@ import axios from "axios";
 export default function AthletePage() {
   const [bio, setBio] = useState([]);
   useEffect(() => {
-    axios.get("/biodata").then(({ data }) => {
+    axios.get("/user-biodata").then(({ data }) => {
       setBio(data);
     });
   }, []);
