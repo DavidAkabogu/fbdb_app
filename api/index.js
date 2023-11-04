@@ -190,7 +190,7 @@ app.put("/biodata", async (req, res) => {
         bio,
       });
       await athleteDoc.save();
-      res.json('ok');
+      res.json("ok");
     }
   });
 });
