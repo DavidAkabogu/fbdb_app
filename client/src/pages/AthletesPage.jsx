@@ -28,9 +28,26 @@ export default function AthletesPage() {
         {" "}
         {athlete.school}{" "}
       </a>
-      <div className="grid gap-2 grid-cols-[2fr_1fr] mt-4 ">
-        <div> a </div>
-        <div> b </div>
+      <div className="grid gap-2 grid-cols-[1fr_1fr] mt-4 justify-items-center items-center ">
+        <div>
+          {athlete.photo?.[0] && (
+            <div>
+              <img className="aspect-square object-cover"
+                src={"http://localhost:4000/uploads/" + athlete.photo[0]}
+                alt=""
+              />
+            </div>
+          )}
+        </div>
+        <div className=" justify-items ">
+          <ul>
+            <li> Name: {athlete.name} </li>
+            <li> Age: {athlete.age} </li>
+            <li> Height: {athlete.height} </li>
+            <li> Weight: {athlete.weight} </li>
+            <li> Bio: {athlete.bio} </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

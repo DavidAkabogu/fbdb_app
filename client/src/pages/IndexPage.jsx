@@ -17,7 +17,7 @@ export default function IndexPage() {
           <Link to={'/biodata/' + athlete._id} key={athlete._id} >
             {athlete.photo?.[0] && (
               <img
-                className="rounded-2xl "
+                className="rounded-2xl aspect-square object-cover "
                 src={"http://localhost:4000/uploads/" + athlete.photo?.[0]}
                 alt=""
               />
