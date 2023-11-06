@@ -9,6 +9,7 @@ import { UserContextProvider } from "./UserContext";
 import ProfilePage from "./pages/ProfilePage";
 import AthletePage from "./pages/AthletePage";
 import AthleteFormPage from "./pages/AthleteFormPage";
+import AthletesPage from "./pages/AthletesPage.jsx";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -25,6 +26,7 @@ function App() {
           <Route path="/account/biodata" element={<AthletePage />} />
           <Route path="/account/biodata/new" element={<AthleteFormPage />} />
           <Route path="/account/biodata/:id" element={<AthleteFormPage />} />
+          <Route path="/biodata/:id" element={<AthletesPage />} />
         </Route>
       </Routes>
     </UserContextProvider>
