@@ -32,7 +32,7 @@ export default function AthletesPage() {
         <div>
           {athlete.photo?.[0] && (
             <div>
-              <img className="aspect-square object-cover"
+              <img className="aspect-square object-cover rounded-3xl"
                 src={"http://localhost:4000/uploads/" + athlete.photo[0]}
                 alt=""
               />
