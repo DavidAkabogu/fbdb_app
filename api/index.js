@@ -12,8 +12,7 @@ const fs = require("fs");
 
 require("dotenv").config();
 
-const PORT = process.env.PORT || 4000;
-
+const port = process.env.PORT || 3000
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "kadeco100%";
@@ -202,8 +201,8 @@ app.get('/biodata', async (req,res) => {
 
 const bootstrap = async () => {
   await mongoose.connect(process.env.MONGO_URL);
-  app.listen(PORT, () => {
-    console.log("connected on port " + PORT);
+  app.listen(port, () => {
+    console.log("connected on port " + port);
 })
 }
 
