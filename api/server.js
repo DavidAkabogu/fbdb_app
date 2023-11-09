@@ -12,7 +12,7 @@ const fs = require("fs");
 
 require("dotenv").config();
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "kadeco100%";
@@ -20,8 +20,12 @@ const jwtSecret = "kadeco100%";
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads/"));
-app.use(cors({ credentials: true, origin: "fbdb-app-akabogu-davids-projects.vercel.app" }));
-
+app.use(
+  cors({
+    credentials: true,
+    origin: "fbdb-app-akabogu-davids-projects.vercel.app",
+  })
+);
 
 // browser testing backend point
 app.get("/test", (req, res) => {
@@ -195,15 +199,15 @@ app.put("/biodata", async (req, res) => {
   });
 });
 
-app.get('/biodata', async (req,res) => {
+app.get("/biodata", async (req, res) => {
   res.json(await Athlete.find());
-})
+});
 
 const bootstrap = async () => {
   await mongoose.connect(process.env.MONGO_URL);
   app.listen(port, () => {
     console.log("connected on port " + port);
-})
-}
+  });
+};
 
 bootstrap();

@@ -36,13 +36,21 @@ export default function AthletePage() {
       <div className="mt-4">
         {bio.length > 0 &&
           bio.map((athlete) => (
-            <Link to={'/account/biodata/' + athlete._id} className=" flex cursor-pointer gap-4 bg-green-100 rounded-2xl p-2 " key={""}>
+            <Link
+              to={"/account/biodata/" + athlete._id}
+              className=" flex cursor-pointer gap-4 bg-green-100 rounded-2xl p-2 "
+              key={""}
+            >
               <div className="flex w-32 h-32 bg-green-300 grow shrink-0 ">
                 {athlete.photo.length > 0 && (
-                  <img className="object-cover" src={'http://localhost:4000/uploads/' + athlete.photo[0]} alt="" />
+                  <img
+                    className="object-cover"
+                    src={"http://localhost:4000/uploads/" + athlete.photo[0]}
+                    alt=""
+                  />
                 )}
               </div>
-              <div className="grow-0 shrink" >
+              <div className="grow-0 shrink">
                 <h2 className="text-xl ">{athlete.sport}</h2>
                 <p className="text-sm mt-2"> {athlete.bio} </p>
               </div>
