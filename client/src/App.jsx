@@ -12,7 +12,7 @@ import AthleteFormPage from "./pages/AthleteFormPage";
 import AthletesPage from "./pages/AthletesPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://ill-lime-dragonfly-kilt.cyclic.app";
 axios.defaults.withCredentials = true;
 
 function App() {
