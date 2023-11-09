@@ -12,6 +12,8 @@ const fs = require("fs");
 
 require("dotenv").config();
 
+const PORT = process.env.PORT || 4000;
+
 const app = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "kadeco100%";
@@ -21,7 +23,6 @@ app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads/"));
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
-mongoose.connect(process.env.MONGO_URL);
 
 // browser testing backend point
 app.get("/test", (req, res) => {
@@ -199,4 +200,11 @@ app.get('/biodata', async (req,res) => {
   res.json(await Athlete.find());
 })
 
-app.listen(4000);
+const bootstrap = async () => {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(PORT, () => {
+    console.log("connected on port " + PORT);
+})
+}
+
+bootstrap();
