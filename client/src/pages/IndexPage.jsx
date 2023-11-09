@@ -18,7 +18,7 @@ export default function IndexPage() {
             {athlete.photo?.[0] && (
               <img
                 className="rounded-2xl aspect-square object-cover "
-                src={"http://localhost:4000/uploads/" + athlete.photo?.[0]}
+                src={"https://ill-lime-dragonfly-kilt.cyclic.app/uploads/" + athlete.photo?.[0]}
                 alt=""
               />
             )}
