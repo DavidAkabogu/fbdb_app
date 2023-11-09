@@ -1,9 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext.jsx";
 
 export default function Header() {
   const { user } = useContext(UserContext);
+  const [keyword, setKeyword] = useState("");
+
+  function handleKeywordChange(event) {
+    console.log(event.target.value);
+    setKeyword(event.target.value);
+  }
+  
   return (
     <div>
       {/* Header Component */}
@@ -51,11 +58,15 @@ export default function Header() {
         </div>
 
         {/* Search Bar Component */}
-        <div className="flex border border-green-500 rounded-full px-4 py-2 gap-20 shadow-md shadow-grey-500 items-centre">
-          <p>Search Active Atheletes</p>
+        <div className="flex border border-green-500 rounded-full px-4 gap-2 py-2 shadow-md shadow-grey-500 items-center">
+          <input
+            onChange={handleKeywordChange}
+            type="text"
+            placeholder="Search Active Athletes"
+          />
 
           {/* Search Icon */}
-          <a href="" className="">
+          <a href={`/search?q=${keyword}`} className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
