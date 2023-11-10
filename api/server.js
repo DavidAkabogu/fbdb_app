@@ -19,14 +19,10 @@ const jwtSecret = "kadeco100%";
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors())
+app.use(cors({
+  origin: '*'
+}))
 app.use("/uploads", express.static(__dirname + "/uploads/"));
-app.use(
-  cors({
-    credentials: true,
-    origin: "fbdb-app-akabogu-davids-projects.vercel.app",
-  })
-);
 
 // browser testing backend point
 app.get("/test", (req, res) => {
