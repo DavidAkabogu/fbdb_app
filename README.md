@@ -30,7 +30,7 @@ You can also filter search results based on different criteria and add favorite 
 
 [Credits]()
 
-This web app was developed by a team of three students, [King David Akabogu, Adama Famous Bernard, Mohammed Buhari Ozegya]() as part of a project for `Software Engineering program`
+This web app was developed by a team of three students, `King David Akabogu` `Adama Famous Bernard` and `Mohammed Buhari Ozegya` as part of a project for `Software Engineering program`
 at `Alx_Africa`.
 
 [Feedback and Support]()
