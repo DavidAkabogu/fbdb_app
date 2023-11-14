@@ -18,9 +18,10 @@ The fbdb web app is built using the following technologies:
 * HTML
 * CSS
 * JavaScript
-* Node.js
-* Express.js
 * MongoDB
+* Express
+* React
+* Node.js
 
 [Usage]()
 
