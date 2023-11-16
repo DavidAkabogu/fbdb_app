@@ -10,6 +10,11 @@ import AthletePage from "./pages/AthletePage";
 import AthleteFormPage from "./pages/AthleteFormPage";
 import AthletesPage from "./pages/AthletesPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import ZonesPage from "./pages/ZonesPage.jsx";
+import StatesPage from "./pages/StatesPage.jsx";
+import SchoolsPage from "./pages/SchoolsPage.jsx";
+import SportsPage from "./pages/SportsPage.jsx";
+import AgeFilterPage from "./pages/AgeFilterPage.jsx";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -28,6 +33,11 @@ function App() {
           <Route path="/account/biodata/:id" element={<AthleteFormPage />} />
           <Route path="/biodata/:id" element={<AthletesPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/zones" element={<ZonesPage />} />
+          <Route path="/schools" element={<SchoolsPage />} />
+          <Route path="/sports" element={<SportsPage />} />
+          <Route path="/age" element={<AgeFilterPage />} />
+          <Route path="/states" element={<StatesPage />} />
         </Route>
       </Routes>
     </UserContextProvider>

@@ -10,7 +10,7 @@ export default function Header() {
     console.log(event.target.value);
     setKeyword(event.target.value);
   }
-  
+
   return (
     <div>
       {/* Header Component */}
@@ -41,20 +41,29 @@ export default function Header() {
               d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
             />
           </svg>
-          <span className="font-bold text-xl"> Naija SDB </span>
+          <span className="font-bold text-xl"> FBDB </span>
         </Link>
 
         {/* Menu Component */}
         <div id="menu" className="flex gap-3 pr-24">
-          <div>Zones</div>
+          <a href="/zones">Zones</a>
+
           <div className="border border-black "></div>
-          <div>Schools</div>
+
+          <a href="/schools">Schools</a>
+
           <div className="border border-black"></div>
-          <div>Athletes</div>
+
+          <a href="/states">States</a>
+
           <div className="border border-black"></div>
-          <div>States</div>
+
+          <a href="/age" >Age</a>
+
           <div className="border border-black"></div>
-          <div>Age</div>
+
+          <a href="/sports"> Sports </a>
+
         </div>
 
         {/* Search Bar Component */}
